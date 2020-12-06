@@ -1,5 +1,6 @@
 
 import assignment.Token;
+import org.apache.commons.lang3.time.StopWatch;
 import org.junit.jupiter.api.*;
 import org.kohsuke.github.*;
 
@@ -9,6 +10,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) //인스턴스 공용화
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class) // Order어노테이션으로 순서 지정
 public class GitHubApiTest {
 
 
@@ -17,8 +19,11 @@ public class GitHubApiTest {
     static HashSet<String> login = new HashSet<>(200);
     static Map<String, Integer> map = new HashMap<>(200);
 
+
+
+
     @BeforeAll
-    public void TokenAccess() throws IOException {
+    public void TokenAccess() throws IOException { // non static
         gitHub = new GitHubBuilder().withOAuthToken(Token.TOKEN.getValue()).build();
     }
 
@@ -29,21 +34,21 @@ public class GitHubApiTest {
     }
 
     @DisplayName("1. github API에 연결한다.")
-    @Test
-    void ApiConnect() {
+    @Test @Order(1)
+    public void apiConnect() {
         assertNotNull(gitHub);
     }
 
     @DisplayName("2. whiteship/live-study 의 모든 이슈를 가져온다")
-    @Test
-    void LiveStudyIssue() throws Exception {
-        assertEquals(18, ghIssues.size(), "총 이슈 갯수는 18개 여야 한다.");
-        assertEquals("18주차 과제: 스트림", ghIssues.get(0).getTitle(), "18주차 과제: 스트림 이여야 한다.");
+    @Test @Order(2)
+    public void liveStudyIssue() throws Exception {
+        assertEquals(18, ghIssues.size(),()-> "총 이슈 갯수는 18개 여야 한다.");
+        assertEquals("18주차 과제: 스트림", ghIssues.get(0).getTitle(),()-> "18주차 과제: 스트림 이여야 한다.");
     }
 
-    @DisplayName("3. 중복없이 Login 정보로 commnet를 단 유저정보를 조회한다.")
-    @Test
-    void 이슈별유저정보조회() throws Exception {
+    @DisplayName("3. 중복없이 Login 정보로 commnet를 단 유저정보를 조회한다. ☺️")
+    @Test @Order(3)
+    public void issueSee() throws Exception {
         for (GHIssue ghIssue : ghIssues) {
             for (GHIssueComment comment : ghIssue.getComments()) { // 각 이슈마다 저장
                 assertAll("Comment",
@@ -61,9 +66,9 @@ public class GitHubApiTest {
 
 
 
-    @DisplayName("4. 참여횟수를 저장하고 퍼센트를 출력한다.")
-    @Test
-    void 참여횟수저장() throws Exception {
+    @DisplayName("4. 참여횟수를 저장하고 퍼센트를 출력한다. \uD83D\uDC37")
+    @Test @Order(4)
+    public void attendSave() throws IOException {
         for (GHIssue ghIssue : ghIssues) {
             for (GHIssueComment comment : ghIssue.getComments()) { // 각 이슈마다 저장
                 login.add(comment.getUser().getLogin()); //중복댓글을 제외하고 저장한다.
@@ -84,7 +89,7 @@ public class GitHubApiTest {
             double percent = (double) (map.get(key) * 100) / 18;
             System.out.println("[Key]:" + key + " [Value]:" +  String.format("%.2f", percent)+"%");
         }
-        assertEquals(2, (int) map.get("HyeonWuJeon"), "전현우는 두번 참석 했다.");
+        assertEquals(1, (int) map.get("HyeonWuJeon"), () -> "참여횟수가 1이 아니다");
     }
 
 }

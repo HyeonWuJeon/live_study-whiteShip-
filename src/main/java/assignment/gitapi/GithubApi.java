@@ -17,7 +17,6 @@ public class GithubApi {
         gitHub = new GitHubBuilder().withOAuthToken(Token.TOKEN.getValue()).build(); // git API에 접근한다
         GHRepository ghRepository = gitHub.getRepository("whiteship/live-study"); //레포지토리 정보를 가져온다.
         List<GHIssue> ghIssues = ghRepository.getIssues(GHIssueState.ALL); //모든 이슈를 가져온다.
-
         /**
          * 이슈별로 코멘트를 단 사용자 정보를 중복을 제거하여 저장한다.
          */
@@ -25,17 +24,17 @@ public class GithubApi {
             for (GHIssueComment comment : ghIssue.getComments()) {
                 login.add(comment.getUser().getLogin());
             }
-        }
 
-        /**
-         * 사용자 이름 : 코멘트 횟수를  key, value 형식으로 저장한다.
-         */
-        for (String s : login) {
-            if (!map.containsKey(s)) {
-                map.put(s, 1);
+            /**
+             * 사용자 이름 : 코멘트 횟수를  key, value 형식으로 저장한다.
+             */
+            for (String s : login) {
+                if (!map.containsKey(s)) {
+                    map.put(s, 1);
+                }
+                int value = map.get(s);
+                map.put(s, ++value);
             }
-            int value = map.get(s);
-            map.put(s, ++value);
         }
 
         /**
