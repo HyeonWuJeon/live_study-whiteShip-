@@ -33,6 +33,11 @@ public class GitHubApiTest {
         ghIssues = ghRepository.getIssues(GHIssueState.ALL); // 모든 이슈를 가져온다.
     }
 
+    @AfterEach
+    void Reset() {
+        login.removeAll(login);
+    }
+
     @DisplayName("1. github API에 연결한다.")
     @Test @Order(1)
     public void apiConnect() {
@@ -92,5 +97,41 @@ public class GitHubApiTest {
         assertEquals(1, (int) map.get("HyeonWuJeon"), () -> "참여횟수가 1이 아니다");
     }
 
+    @Nested
+    @DisplayName("주차별 테스트") @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    @TestInstance(TestInstance.Lifecycle.PER_METHOD) //인스턴스 공용화
+    class Context_week_Test {
+        // 주차별 테스트
+        void WeekTest(int Week) throws IOException {
+            for (GHIssueComment ghIssue : ghIssues.get(Week).getComments()) {
+                login.add(ghIssue.getUser().getLogin()); //중복댓글을 제외하고 저장한다.
+            }
+        }
+
+        @Test
+        @DisplayName("1 주차에 HyunWuJeon는 참가하였다.") @Order(1)
+        void Hyunwoo1Week() throws IOException {
+            final int Week = 17;
+            WeekTest(Week);
+            System.out.println("login.size() = " + login.size());
+            assertTrue(login.contains("HyeonWuJeon"));
+        }
+        @Test
+        @DisplayName("2 주차에 HyunWuJeon는 참가하였다.") @Order(2)
+        void Hyunwoo2Week() throws IOException {
+            final int Week = 16;
+            WeekTest(Week);
+            System.out.println("2login.size() = " + login.size());
+            assertTrue(login.contains("HyeonWuJeon"));
+        }
+        @Test
+        @DisplayName("3 주차에 HyunWuJeon는 참가하지 못했다.") @Order(3)
+        void Hyunwoo3Week() throws IOException {
+            final int Week = 15;
+            WeekTest(Week);
+            System.out.println("3login.size() = " + login.size());
+            assertFalse(login.contains("HyeonWuJeon"));
+        }
+    }
 }
 
