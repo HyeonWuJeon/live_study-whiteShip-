@@ -1,10 +1,5 @@
 package assignment.queue;
 
-import assignment.listNode.ListNode;
-import assignment.stack.ListNodeStack;
-
-import java.util.List;
-
 public class ListNodeQueue {
 
     private ListNode node = null;
