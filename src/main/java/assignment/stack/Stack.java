@@ -26,7 +26,7 @@ public class Stack {
         if(this.top == StackSize-1){
             System.out.println("Stack is Full");
         }
-//        top = top +1;
+
         ArrStack[++top] = element;
     }
 

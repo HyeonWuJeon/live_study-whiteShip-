@@ -36,6 +36,7 @@ class StackTest {
         stack.push(15);
         assertEquals(2,stack.top, ()-> "값을 저장할때마다 top값이 증가하여야 한다." ); // then
         assertEquals(lastElement,stack.pop(), ()-> "스택의 TOP값은 15이어야 한다." ); // then
+
     }
 
     @DisplayName("3. top 값 빼지않고 출력만 하기 ")
