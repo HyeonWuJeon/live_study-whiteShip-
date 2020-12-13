@@ -24,7 +24,7 @@ public class GitHubApiTest {
 
     @BeforeAll
     public void TokenAccess() throws IOException { // non static
-        gitHub = new GitHubBuilder().withOAuthToken(Token.TOKEN.getValue()).build();
+        gitHub = new GitHubBuilder().withOAuthToken(Token.TOKEN.getName()).build();
     }
 
     @BeforeEach
