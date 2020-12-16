@@ -1,4 +1,4 @@
-package assignment.queue;
+package assignment.fourweeks.queue;
 
 import org.junit.jupiter.api.*;
 

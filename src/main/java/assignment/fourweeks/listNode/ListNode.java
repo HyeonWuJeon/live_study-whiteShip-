@@ -1,4 +1,4 @@
-package assignment.listNode;
+package assignment.fourweeks.listNode;
 
 public class ListNode {
 

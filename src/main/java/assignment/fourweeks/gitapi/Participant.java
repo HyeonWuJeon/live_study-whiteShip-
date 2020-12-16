@@ -1,4 +1,4 @@
-package assignment.gitapi;
+package assignment.fourweeks.gitapi;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,6 @@
-package assignment.gitapi;
+package assignment.fourweeks.gitapi;
 
 import assignment.Token;
-import org.apache.commons.lang3.ObjectUtils;
 import org.kohsuke.github.*;
 
 import java.io.IOException;

@@ -1,9 +1,8 @@
-package assignment.queue;
+package assignment.fourweeks.queue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static assignment.queue.ListNodeQueue.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ListNodeQueueTest {

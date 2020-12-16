@@ -1,4 +1,4 @@
-package assignment.listNode;
+package assignment.fourweeks.listNode;
 
 import org.junit.jupiter.api.*;
 

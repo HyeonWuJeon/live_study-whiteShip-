@@ -1,4 +1,4 @@
-package assignment.stack;
+package assignment.fourweeks.stack;
 
 import org.junit.jupiter.api.*;
 

@@ -1,8 +1,4 @@
-package assignment.stack;
-
-import com.sun.org.apache.xml.internal.security.algorithms.implementations.IntegrityHmac;
-
-import java.sql.SQLOutput;
+package assignment.fourweeks.stack;
 
 public class Stack {
 

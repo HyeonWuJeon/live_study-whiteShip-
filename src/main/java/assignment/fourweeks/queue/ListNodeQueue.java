@@ -1,4 +1,4 @@
-package assignment.queue;
+package assignment.fourweeks.queue;
 
 public class ListNodeQueue {
 
