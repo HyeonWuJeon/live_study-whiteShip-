@@ -1,4 +1,4 @@
-package assignment;
+package assignment.fourweeks.stack;
 
 
 public class ListNodeStack {
